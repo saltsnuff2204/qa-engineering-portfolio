@@ -1,0 +1,31 @@
+name: Portfolio validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Postman collection JSON
+        run: python -m json.tool api/restaurant-menu.postman_collection.json > /dev/null
+      - name: Check required portfolio files
+        shell: bash
+        run: |
+          test -s README.md
+          test -s test-plan/restaurant-menu-test-plan.md
+          test -s test-cases/functional-test-cases.md
+          test -s bug-reports/sample-bug-reports.md
+          test -s sql/data-validation.sql
