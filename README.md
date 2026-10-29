@@ -13,10 +13,10 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 
 | Case study | What it shows |
 | --- | --- |
-| [BestYs — from a user request to retest](case-studies/bestys-request-to-retest.md) | Support request → reproduction → clear handoff → QA verification → retest |
-| [AMAN — AI incident validation](case-studies/aman-ai-incident-validation.md) | True-positive / false-positive analysis, admin-panel checks, incident and notification scenarios |
-| [Quiz → Curriculum transfer](case-studies/quiz-curriculum-transfer.md) | Translating a product request into acceptance criteria, mapping-risk analysis, and validation scenarios |
-| [Anonymized stale-notification report](case-studies/anonymized-stale-notification-bug.md) | A public-safe example of documenting a scheduling risk for a development team |
+| [BestYs: User Requests and Retesting](case-studies/bestys-request-to-retest.md) | Support request → reproduction → clear handoff → QA verification → retest |
+| [AMAN: Testing AI Video Alerts](case-studies/aman-ai-incident-validation.md) | True-positive / false-positive analysis, admin-panel checks, incident and notification scenarios |
+| [Exam Transfer: Making Sure Exams Move Correctly](case-studies/quiz-curriculum-transfer.md) | Translating a product request into acceptance criteria, mapping-risk analysis, and validation scenarios |
+| [Notification Timing: Finding an Outdated Reminder](case-studies/anonymized-stale-notification-bug.md) | A public-safe example of documenting a scheduling risk for a development team |
 
 ## How I approach a task
 

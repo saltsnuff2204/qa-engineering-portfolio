@@ -1,4 +1,4 @@
-# AMAN — QA validation of AI video incidents and the admin panel
+# AMAN: Testing AI Video Alerts
 
 > `[SANITIZED WORK CASE]` · QA Tester
 

@@ -1,4 +1,4 @@
-# Schedule change leaves a stale notification event
+# Notification Timing: Finding an Outdated Reminder
 
 > `[SANITIZED WORK CASE]` · Example of an anonymized defect report
 

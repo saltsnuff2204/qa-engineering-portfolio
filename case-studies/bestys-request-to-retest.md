@@ -1,4 +1,4 @@
-# BestYs — from a user request to retest
+# BestYs: User Requests and Retesting
 
 > `[SANITIZED WORK CASE]` · Technical Support and QA Tester
 
