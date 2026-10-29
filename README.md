@@ -22,6 +22,7 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 
 | Project | What it shows |
 | --- | --- |
+| [Finovo — Telegram Finance Tracker](projects/finovo-telegram-finance-tracker.md) | Live Telegram bot for quick personal income/expense tracking, summaries, goals, debts, and credits |
 | [Cold Carti Fan Archive — Team Coursework](projects/cold-carti-fan-archive.md) | Responsive website, interactive gallery and collection, keyboard navigation, client-side validation, and automated static checks |
 
 ## How I approach a task
@@ -37,6 +38,7 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 | Label | Meaning |
 | --- | --- |
 | `[SANITIZED WORK CASE]` | An anonymized description of real responsibilities and workflows. It deliberately omits client data and internal evidence. |
+| `[PERSONAL PROJECT]` | A personal project with a public demo. It is presented without customer data, tokens, or private operational details. |
 | `[TEAM COURSEWORK]` | A team academic project. It is credited as team work; no individual ownership is invented. |
 
 Every case explains what can be shared and what must stay private. Read the [case-study guide](case-studies/README.md) and [evidence policy](evidence/README.md) before adding a screenshot, log, or test record.

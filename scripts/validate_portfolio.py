@@ -23,6 +23,7 @@ REQUIRED_FILES = (
     "case-studies/anonymized-stale-notification-bug.md",
     "evidence/README.md",
     "projects/cold-carti-fan-archive.md",
+    "projects/finovo-telegram-finance-tracker.md",
 )
 
 CASE_STUDY_SECTIONS = {
@@ -57,6 +58,14 @@ CASE_STUDY_SECTIONS = {
 }
 
 PROJECT_SECTIONS = {
+    "projects/finovo-telegram-finance-tracker.md": (
+        "[PERSONAL PROJECT]",
+        "## Product",
+        "## What it does",
+        "## Product thinking",
+        "## Public demo boundary",
+        "## Scope",
+    ),
     "projects/cold-carti-fan-archive.md": (
         "[TEAM COURSEWORK]",
         "## Product",
