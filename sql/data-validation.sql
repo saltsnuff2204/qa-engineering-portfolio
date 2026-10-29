@@ -1,5 +1,13 @@
 -- Restaurant Menu Manager QA validation queries
--- Run only against a disposable local test database.
+-- [LEARNING PROJECT]
+--
+-- Preconditions:
+--   * Run only against a disposable local PostgreSQL test database.
+--   * The application has created the `menu_items` table from the current schema.
+--   * Do not use these queries on an employer, client, or production database.
+--
+-- This file demonstrates single-table data validation for the local learning app.
+-- It does not claim JOIN-based validation or an executed production data audit.
 
 -- 1. Review the newest records created by UI or API tests.
 SELECT id, name, price, category, type, vegetarian, has_ice

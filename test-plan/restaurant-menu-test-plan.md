@@ -1,5 +1,9 @@
 # Restaurant Menu Manager Test Plan
 
+> `[LEARNING PROJECT]` · Planning artefact, not a release sign-off
+
+This plan defines the intended local test scope. An executed run must be recorded separately in [`test-runs/`](../test-runs/README.md) before any exit criterion is treated as met.
+
 ## Objective
 
 Verify that users can reliably view, create, search, filter, and delete restaurant menu items through the React interface and Java REST API, while PostgreSQL stores valid and consistent records.

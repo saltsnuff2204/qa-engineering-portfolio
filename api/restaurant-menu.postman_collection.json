@@ -1,13 +1,14 @@
 {
   "info": {
     "_postman_id": "e81a3d1c-3e3d-4bea-bdca-f8da07ba8ec1",
-    "name": "Restaurant Menu Manager QA",
-    "description": "Local-only API checks for the Restaurant Menu Manager portfolio project.",
+    "name": "Restaurant Menu Manager — local API smoke checks",
+    "description": "Executable checks designed for the local Restaurant Menu Manager learning project. Run only against a disposable local PostgreSQL database. The collection is test design; this file is not a stored execution result.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     { "key": "baseUrl", "value": "http://localhost:4567" },
-    { "key": "createdItemId", "value": "1" }
+    { "key": "createdDishId", "value": "" },
+    { "key": "createdDrinkId", "value": "" }
   ],
   "item": [
     {
@@ -37,7 +38,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Mushroom risotto\",\n  \"price\": 12.50,\n  \"category\": \"MAIN_DISH\",\n  \"isVegetarian\": true\n}" },
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Portfolio test dish\",\n  \"price\": 12.5,\n  \"category\": \"MAIN_DISH\",\n  \"isVegetarian\": true\n}" },
         "url": "{{baseUrl}}/api/menu/dish"
       },
       "event": [{
@@ -45,34 +46,181 @@
         "script": { "exec": [
           "pm.test('Status is 201', () => pm.response.to.have.status(201));",
           "const body = pm.response.json();",
-          "pm.test('Generated ID is returned', () => pm.expect(body.id).to.be.a('number'));",
-          "pm.collectionVariables.set('createdItemId', body.id);"
+          "pm.test('Generated numeric ID is returned', () => pm.expect(body.id).to.be.a('number'));",
+          "pm.test('Success message is returned', () => pm.expect(body.message).to.eql('Dish created'));",
+          "pm.collectionVariables.set('createdDishId', body.id);"
         ] }
       }]
     },
     {
-      "name": "Reject invalid price",
+      "name": "Create valid drink",
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Invalid item\",\n  \"price\": 0,\n  \"category\": \"DESSERT\",\n  \"isVegetarian\": false\n}" },
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Portfolio test drink\",\n  \"price\": 3.25,\n  \"category\": \"DRINK\",\n  \"hasIce\": true\n}" },
+        "url": "{{baseUrl}}/api/menu/drink"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+          "const body = pm.response.json();",
+          "pm.test('Generated numeric ID is returned', () => pm.expect(body.id).to.be.a('number'));",
+          "pm.test('Success message is returned', () => pm.expect(body.message).to.eql('Drink created'));",
+          "pm.collectionVariables.set('createdDrinkId', body.id);"
+        ] }
+      }]
+    },
+    {
+      "name": "Created items appear in the menu list",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/menu" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+          "const items = pm.response.json();",
+          "const dishId = Number(pm.collectionVariables.get('createdDishId'));",
+          "const drinkId = Number(pm.collectionVariables.get('createdDrinkId'));",
+          "pm.test('Created dish is present', () => pm.expect(items.some((item) => item.id === dishId)).to.eql(true));",
+          "pm.test('Created drink is present', () => pm.expect(items.some((item) => item.id === drinkId)).to.eql(true));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject blank name",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"   \",\n  \"price\": 10,\n  \"category\": \"DESSERT\",\n  \"isVegetarian\": false\n}" },
         "url": "{{baseUrl}}/api/menu/dish"
       },
       "event": [{
         "listen": "test",
         "script": { "exec": [
           "pm.test('Status is 400', () => pm.response.to.have.status(400));",
-          "pm.test('Safe error is returned', () => pm.expect(pm.response.json().error).to.be.a('string'));"
+          "pm.test('Safe validation error is returned', () => pm.expect(pm.response.json().error).to.eql('Name is required'));"
         ] }
       }]
     },
     {
-      "name": "Delete created item",
-      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/menu/{{createdItemId}}" },
+      "name": "Reject zero price",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Invalid price\",\n  \"price\": 0,\n  \"category\": \"DESSERT\",\n  \"isVegetarian\": false\n}" },
+        "url": "{{baseUrl}}/api/menu/dish"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Price validation is clear', () => pm.expect(pm.response.json().error).to.eql('Price must be greater than zero'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject dish with DRINK category",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Wrong dish category\",\n  \"price\": 10,\n  \"category\": \"DRINK\",\n  \"isVegetarian\": false\n}" },
+        "url": "{{baseUrl}}/api/menu/dish"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Category/type error is clear', () => pm.expect(pm.response.json().error).to.eql('A dish cannot use the DRINK category'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject drink with non-DRINK category",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Wrong drink category\",\n  \"price\": 4,\n  \"category\": \"DESSERT\",\n  \"hasIce\": false\n}" },
+        "url": "{{baseUrl}}/api/menu/drink"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Category/type error is clear', () => pm.expect(pm.response.json().error).to.eql('A drink must use the DRINK category'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject malformed JSON",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"name\": \"Broken JSON\", \"price\": }" },
+        "url": "{{baseUrl}}/api/menu/dish"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Safe JSON error is returned', () => pm.expect(pm.response.json().error).to.eql('Request body must be valid JSON'));",
+          "pm.test('No stack trace leaks', () => pm.expect(pm.response.text()).to.not.include('Exception'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject malformed delete ID",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/menu/abc" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Safe ID error is returned', () => pm.expect(pm.response.json().error).to.eql('Menu item ID must be a positive integer'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Reject zero delete ID",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/menu/0" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+          "pm.test('Safe ID error is returned', () => pm.expect(pm.response.json().error).to.eql('Menu item ID must be a positive integer'));"
+        ] }
+      }]
+    },
+    {
+      "name": "Delete created dish",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/menu/{{createdDishId}}" },
       "event": [{
         "listen": "test",
         "script": { "exec": [
           "pm.test('Status is 204', () => pm.response.to.have.status(204));"
+        ] }
+      }]
+    },
+    {
+      "name": "Delete created drink",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/menu/{{createdDrinkId}}" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 204', () => pm.response.to.have.status(204));"
+        ] }
+      }]
+    },
+    {
+      "name": "Verify cleanup in menu list",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/menu" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+          "const items = pm.response.json();",
+          "const dishId = Number(pm.collectionVariables.get('createdDishId'));",
+          "const drinkId = Number(pm.collectionVariables.get('createdDrinkId'));",
+          "pm.test('Created dish was removed', () => pm.expect(items.some((item) => item.id === dishId)).to.eql(false));",
+          "pm.test('Created drink was removed', () => pm.expect(items.some((item) => item.id === drinkId)).to.eql(false));"
         ] }
       }]
     },
@@ -82,7 +230,8 @@
       "event": [{
         "listen": "test",
         "script": { "exec": [
-          "pm.test('Status is 404', () => pm.response.to.have.status(404));"
+          "pm.test('Status is 404', () => pm.response.to.have.status(404));",
+          "pm.test('Missing-item error is returned', () => pm.expect(pm.response.json().error).to.eql('Menu item not found'));"
         ] }
       }]
     }

@@ -1,4 +1,17 @@
-# Web Smoke Checklist
+# Web Smoke-Test Charter and Checklist
+
+> `[LEARNING PROJECT]` · Planned checklist, not a recorded pass result
+
+## Run record
+
+| Field | Value |
+| --- | --- |
+| Date | Not run |
+| Tester | Not run |
+| Application revision | Not run |
+| Environment and test data | Disposable local environment required |
+| Overall result | Not run |
+| Evidence | Add a link under [`test-runs/`](../test-runs/README.md) after execution |
 
 ## Environment
 
@@ -32,7 +45,11 @@
 
 - [ ] Keyboard focus reaches all interactive controls
 - [ ] Labels and validation messages are understandable
-- [ ] Current Chrome desktop flow passes
+- [ ] Current Chrome desktop flow
 - [ ] Mobile viewport has no overlapping controls
 - [ ] Table remains usable on a narrow screen
+
+## Execution rule
+
+Check an item only during a real run. If the run is blocked, record the blocker and keep the item unchecked rather than treating the checklist as evidence of a pass.
 

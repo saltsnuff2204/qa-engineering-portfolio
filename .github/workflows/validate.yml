@@ -1,4 +1,4 @@
-name: Portfolio validation
+name: Portfolio integrity
 
 on:
   push:
@@ -19,13 +19,5 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate Postman collection JSON
-        run: python -m json.tool api/restaurant-menu.postman_collection.json > /dev/null
-      - name: Check required portfolio files
-        shell: bash
-        run: |
-          test -s README.md
-          test -s test-plan/restaurant-menu-test-plan.md
-          test -s test-cases/functional-test-cases.md
-          test -s bug-reports/sample-bug-reports.md
-          test -s sql/data-validation.sql
+      - name: Validate public portfolio structure and links
+        run: python scripts/validate_portfolio.py

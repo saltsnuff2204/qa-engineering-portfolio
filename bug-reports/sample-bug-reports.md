@@ -1,92 +1,41 @@
-# Sample Bug Reports
+# Example Issue Documentation Style — Restaurant Menu Manager
 
-These reports demonstrate documentation style using a learning application. They contain no production or employer data.
+> `[LEARNING PROJECT]` · Documentation example, not a production-defect claim
 
-## BUG-001 Live dashboard cannot load menu data
+This page demonstrates how I structure an issue for a small local learning application. It is separate from the anonymized work-case report in [`case-studies/`](../case-studies/anonymized-stale-notification-bug.md). The local application's public-deployment limits are documented in [known limitations](../known-limitations.md), not presented as an active demo failure.
 
-- **Severity:** Major
-- **Priority:** High
-- **Environment:** Public legacy frontend deployment; Chrome desktop
-- **Status:** Identified during portfolio audit; deployment removed from portfolio claims
+## LAB-001 — UI hides a safe API validation message
 
-### Preconditions
-
-The legacy frontend is publicly reachable.
-
-### Steps to reproduce
-
-1. Open the legacy dashboard.
-2. Wait for the initial menu request.
-3. Inspect the Network panel request to `/api/menu`.
-
-### Actual result
-
-The interface loads, but the menu request returns `404`. The page shows `Failed to load menu`, so create, list, and delete flows are unavailable.
-
-### Expected result
-
-The frontend should call a reachable backend and receive `200 OK` with a JSON array, or the deployment should clearly state that it is a static preview.
-
-### Evidence to capture
-
-- Network request URL, status, response body, and timing
-- Console output
-- Screenshot of the visible error state
-
-### Recommendation
-
-Deploy the API and configure the frontend base URL per environment. Add a deployment smoke check for `/api/health` and `/api/menu`.
-
-## BUG-002 Generic client error hides API validation details
-
+- **Type:** Usability / error-feedback improvement
 - **Severity:** Minor
 - **Priority:** Medium
-- **Environment:** Local dashboard and API
-- **Status:** Open usability improvement
+- **Environment:** Local React dashboard and Java REST API
+- **Status:** Open learning-project improvement; no release claim
 
 ### Preconditions
 
-The API returns a structured validation error such as `{"error":"Name is required"}`.
+The API returns a structured validation response such as `{"error":"Name is required"}` for an invalid request.
 
 ### Steps to reproduce
 
-1. Open the dashboard.
+1. Open the local dashboard with the API running.
 2. Submit data that passes or bypasses client validation but fails server validation.
-3. Observe the error displayed by the UI.
+3. Observe the message displayed by the UI.
 
 ### Actual result
 
-The UI shows only `Failed to add item` and discards the API error message.
+The current UI can show a generic `Failed to add item` message and discard the safe validation text returned by the API.
 
 ### Expected result
 
-The UI should display a safe, specific message returned by the API so the user can correct the input.
+The UI should display a safe, specific validation message returned by the API so the user can correct the input, with a generic fallback if no safe message exists.
+
+### Evidence needed for an executed run
+
+- Request and response from the browser Network panel.
+- Screenshot of the visible UI message.
+- Exact local application revision and test data note.
 
 ### Recommendation
 
-Parse the JSON error body for non-2xx responses and display its safe `error` field, with a generic fallback.
-
-## BUG-003 Unauthenticated delete route is unsafe for public deployment
-
-- **Severity:** Critical for public deployment
-- **Priority:** High
-- **Environment:** Java REST API
-- **Status:** Known limitation; local-only use documented
-
-### Steps to reproduce
-
-1. Obtain any valid menu item ID.
-2. Send `DELETE /api/menu/{id}` without authentication.
-
-### Actual result
-
-The item can be deleted without identity or permission checks.
-
-### Expected result
-
-Public deployments should require authenticated, authorised access to destructive routes.
-
-### Recommendation
-
-Keep the application local-only until authentication, role checks, CSRF/CORS policy, and audit logging are implemented.
-
+Parse the JSON error body for non-2xx responses and display its safe `error` field, with a generic fallback. Record a verified fix and retest in [`test-runs/`](../test-runs/README.md) before presenting it as resolved.
