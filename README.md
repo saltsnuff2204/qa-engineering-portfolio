@@ -22,7 +22,7 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 
 | Project | What it shows |
 | --- | --- |
-| [Finovo — Telegram Finance Tracker](projects/finovo-telegram-finance-tracker.md) | Live Telegram bot for quick personal income/expense tracking, summaries, goals, debts, and credits |
+| [Finovo — Telegram Finance Tracker](projects/finovo-telegram-finance-tracker.md) | Live Telegram bot and public source code for quick personal income/expense tracking, summaries, goals, debts, and credits |
 | [Cold Carti Fan Archive — Team Coursework](projects/cold-carti-fan-archive.md) | Responsive website, interactive gallery and collection, keyboard navigation, client-side validation, and automated static checks |
 
 ## How I approach a task

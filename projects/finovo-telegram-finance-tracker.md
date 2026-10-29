@@ -1,8 +1,8 @@
 # Finovo — Telegram Finance Tracker
 
-> `[PERSONAL PROJECT]` · Live Telegram bot
+> `[PERSONAL PROJECT]` · Live Telegram bot · Public source code
 
-**Try it:** [@finovo_tracker_bot](https://t.me/finovo_tracker_bot)
+**Try it:** [@finovo_tracker_bot](https://t.me/finovo_tracker_bot) · **Source:** [GitHub repository](https://github.com/saltsnuff2204/finovo-telegram-finance-tracker)
 
 ## Product
 
@@ -20,9 +20,13 @@ Finovo is a personal-finance tracker that lets a user record income and expenses
 
 The core idea is to reduce the friction of expense tracking: a user can capture a purchase in the same chat app they already use, then return later for a daily or monthly overview.
 
+## Technical evidence
+
+The public repository documents the implementation with Next.js, React, TypeScript, Cloudflare D1, Drizzle ORM and a Telegram Mini App flow. It includes automated checks for statement import, PDF parsing and Telegram webhook deduplication, plus a GitHub Actions quality workflow.
+
 ## Public demo boundary
 
-The public demo is the Telegram bot itself. This portfolio does not include user transactions, financial records, database exports, source tokens, private logs, or backend implementation details.
+The public demo includes the Telegram bot and source repository. Neither contains user transactions, financial records, database exports, source tokens, private logs, or production deployment identifiers. The repository image uses a synthetic `Демо` account with zero balances.
 
 ## Scope
 
