@@ -22,6 +22,7 @@ REQUIRED_FILES = (
     "case-studies/quiz-curriculum-transfer.md",
     "case-studies/anonymized-stale-notification-bug.md",
     "evidence/README.md",
+    "projects/cold-carti-fan-archive.md",
 )
 
 CASE_STUDY_SECTIONS = {
@@ -52,6 +53,17 @@ CASE_STUDY_SECTIONS = {
         "## Actual result",
         "## Expected result",
         "## Retest boundary",
+    ),
+}
+
+PROJECT_SECTIONS = {
+    "projects/cold-carti-fan-archive.md": (
+        "[TEAM COURSEWORK]",
+        "## Product",
+        "## What the site includes",
+        "## Tech",
+        "## Quality checks",
+        "## Scope and attribution",
     ),
 }
 
@@ -89,6 +101,14 @@ def validate_case_studies(errors: list[str]) -> None:
                 error(errors, f"Missing required case-study section '{section}' in {relative_path}")
 
 
+def validate_projects(errors: list[str]) -> None:
+    for relative_path, sections in PROJECT_SECTIONS.items():
+        text = (ROOT / relative_path).read_text(encoding="utf-8")
+        for section in sections:
+            if section not in text:
+                error(errors, f"Missing required project section '{section}' in {relative_path}")
+
+
 def validate_local_markdown_links(errors: list[str]) -> None:
     for markdown_file in ROOT.rglob("*.md"):
         text = markdown_file.read_text(encoding="utf-8")
@@ -116,6 +136,7 @@ def main() -> int:
     errors: list[str] = []
     validate_required_files(errors)
     validate_case_studies(errors)
+    validate_projects(errors)
     validate_local_markdown_links(errors)
     validate_token_patterns(errors)
 

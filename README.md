@@ -1,4 +1,4 @@
-# Alikhan Zhaxylyk — QA & Technical Support Case Studies
+# Alikhan Zhaxylyk — QA Case Studies & Selected Projects
 
 [![Portfolio integrity](https://github.com/saltsnuff2204/qa-engineering-portfolio/actions/workflows/validate.yml/badge.svg)](https://github.com/saltsnuff2204/qa-engineering-portfolio/actions/workflows/validate.yml)
 
@@ -18,6 +18,12 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 | [Exam Transfer: Making Sure Exams Move Correctly](case-studies/quiz-curriculum-transfer.md) | Translating a product request into acceptance criteria, mapping-risk analysis, and validation scenarios |
 | [Notification Timing: Finding an Outdated Reminder](case-studies/anonymized-stale-notification-bug.md) | A public-safe example of documenting a scheduling risk for a development team |
 
+## Selected project
+
+| Project | What it shows |
+| --- | --- |
+| [Cold Carti Fan Archive — Team Coursework](projects/cold-carti-fan-archive.md) | Responsive website, interactive gallery and collection, keyboard navigation, client-side validation, and automated static checks |
+
 ## How I approach a task
 
 1. Clarify the user scenario, business rule, and expected outcome.
@@ -31,6 +37,7 @@ Junior QA Engineer and Technical Support specialist based in Astana, Kazakhstan.
 | Label | Meaning |
 | --- | --- |
 | `[SANITIZED WORK CASE]` | An anonymized description of real responsibilities and workflows. It deliberately omits client data and internal evidence. |
+| `[TEAM COURSEWORK]` | A team academic project. It is credited as team work; no individual ownership is invented. |
 
 Every case explains what can be shared and what must stay private. Read the [case-study guide](case-studies/README.md) and [evidence policy](evidence/README.md) before adding a screenshot, log, or test record.
 
