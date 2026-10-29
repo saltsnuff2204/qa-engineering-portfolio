@@ -2,10 +2,9 @@
 
 This folder contains concise, public-safe descriptions of work that informs my QA and technical-support practice.
 
-## Reading the labels
+## Reading the label
 
 - `[SANITIZED WORK CASE]` — based on real work. Names, identifiers, dates, screenshots, video, internal URLs, tickets, and user data are withheld or generalized.
-- `[LEARNING PROJECT]` — a local educational project or a practice artefact. It is not represented as an employer deliverable or a production release.
 
 ## Evidence standard
 

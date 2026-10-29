@@ -4,8 +4,8 @@ This repository favors public-safe, reproducible evidence over impressive-lookin
 
 ## What may be added
 
-- Output from a local, disposable test run with date, environment, and command recorded.
-- Screenshots or videos created from a local learning project with no private data.
+- Output from a permitted, disposable test run with date, environment, and command recorded.
+- Screenshots or videos created in an environment where publication is explicitly allowed and no private data is present.
 - Redacted examples where the owner has explicitly allowed publication.
 
 ## What must not be added
